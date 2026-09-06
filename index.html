@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crudo Smak Włoch — włoskie delikatesy w Lublińcu</title>
+<meta name="description" content="Crudo Smak Włoch — sklep z włoskimi szynkami, serami i delikatesami w Lublińcu. Plac gen. Tadeusza Kościuszki 4.">
+<link rel="icon" href="assets/logo.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --cream:#FBF3E1;
+    --cream-deep:#F3E6C8;
+    --red:#D6402C;
+    --red-deep:#AF2E1D;
+    --green:#2E7D46;
+    --green-deep:#1F5C33;
+    --gold:#E3A73E;
+    --ink:#2A2118;
+    --ink-soft:#5B4F3F;
+    --line: rgba(42,33,24,0.14);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background-color:var(--cream);
+    background-image:
+      radial-gradient(circle at 6% 10%, rgba(46,125,70,0.11), transparent 40%),
+      radial-gradient(circle at 94% 22%, rgba(214,64,44,0.10), transparent 42%),
+      radial-gradient(circle at 30% 78%, rgba(227,167,62,0.13), transparent 45%),
+      radial-gradient(circle at 88% 88%, rgba(46,125,70,0.08), transparent 40%);
+    background-attachment:fixed;
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    font-size:16px;
+    overflow-x:hidden;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit;}
+
+  h1,h2,h3,.display{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    line-height:1.08;
+    margin:0;
+    color:var(--ink);
+  }
+
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px; position:relative;}
+  @media (max-width:640px){ .wrap{padding:0 20px;} }
+
+  .eyebrow{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:500;
+    color:var(--red);
+    font-size:1.05rem;
+    margin:0 0 8px 0;
+  }
+  .underline{
+    display:inline-block; height:3px; width:46px; background:var(--gold);
+    margin-top:16px; transform-origin:left; transform:scaleX(0);
+    transition:transform .7s cubic-bezier(.2,.8,.2,1);
+  }
+  .is-visible .underline{transform:scaleX(1);}
+
+  /* ---------- reveal animation system ---------- */
+  .reveal, .reveal-left, .reveal-right, .reveal-pop{
+    opacity:0; transition:opacity .8s ease, transform .8s cubic-bezier(.2,.8,.2,1);
+  }
+  .reveal{transform:translateY(28px);}
+  .reveal-left{transform:translateX(-36px);}
+  .reveal-right{transform:translateX(36px);}
+  .reveal-pop{transform:scale(.88);}
+  .is-visible.reveal, .is-visible.reveal-left, .is-visible.reveal-right{opacity:1; transform:translate(0,0);}
+  .is-visible.reveal-pop{opacity:1; transform:scale(1);}
+  @media (prefers-reduced-motion: reduce){
+    .reveal, .reveal-left, .reveal-right, .reveal-pop, .underline, .hero-banner img{
+      transition:none !important; transform:none !important; opacity:1 !important; animation:none !important;
+    }
+  }
+
+  .rule{border:none; height:1px; background:var(--line); margin:0;}
+
+  /* ---------- torn divider ---------- */
+  .torn{display:block; width:100%; position:relative; margin-top:-1px;}
+  .torn svg{display:block; width:100%; height:44px;}
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(251,243,225,0.9);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:12px 32px; max-width:1180px; margin:0 auto;
+  }
+  .brand{display:flex; align-items:center; gap:12px; text-decoration:none;}
+  .brand img{height:46px; width:auto;}
+  .brand-name{font-family:'Fraunces', serif; font-weight:600; font-size:1.2rem;}
+  .brand-name span{display:block; font-family:'Inter',sans-serif; font-weight:600; font-size:0.6rem; letter-spacing:0.08em; color:var(--ink-soft); margin-top:1px;}
+
+  nav.links{display:flex; gap:26px; font-size:0.92rem;}
+  nav.links a{text-decoration:none; color:var(--ink-soft); transition:color .2s;}
+  nav.links a:hover{color:var(--red);}
+  .nav-cta{font-size:0.85rem; text-decoration:none; color:#fff; background:var(--red); padding:9px 18px; white-space:nowrap;}
+  .menu-toggle{display:none; background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--ink);}
+
+  .mobile-links{display:none;}
+  @media (max-width:860px){
+    .nav > nav.links{display:none;}
+    .nav-cta{display:none;}
+    .menu-toggle{display:block;}
+    .mobile-links.open{display:flex; flex-direction:column; padding:8px 32px 20px; border-top:1px solid var(--line);}
+    .mobile-links a{padding:12px 0; border-bottom:1px solid var(--line); text-decoration:none; color:var(--ink-soft);}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{padding:0 0 0; text-align:center;}
+  .hero .wrap{max-width:1180px;}
+  .hero-tag{font-family:'Fraunces',serif; font-style:italic; color:var(--green); font-size:1.05rem; margin-bottom:6px;}
+  .hero-banner{
+    position:relative; width:100%; height:78vh; min-height:460px; max-height:720px;
+    overflow:hidden;
+  }
+  .hero-banner img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 42%;
+    opacity:0; transform:scale(1.08);
+    animation:heroLand 1.3s cubic-bezier(.16,.85,.3,1.05) forwards;
+  }
+  .hero-tag-badge{
+    position:absolute; top:28px; left:50%; transform:translateX(-50%);
+    background:rgba(251,243,225,0.92); padding:10px 22px;
+    font-family:'Fraunces',serif; font-style:italic; color:var(--green); font-size:1rem;
+    z-index:2; opacity:0; animation:fadeUp .8s ease .4s forwards;
+    box-shadow:0 10px 26px -12px rgba(42,33,24,0.35);
+  }
+  @keyframes heroLand{
+    to{opacity:1; transform:scale(1);}
+  }
+  .hero-lede{
+    max-width:56ch; margin:34px auto 0; font-size:1.12rem; color:var(--ink-soft);
+    opacity:0; transform:translateY(16px);
+    animation:fadeUp .8s ease .55s forwards;
+    padding:0 20px;
+  }
+  @keyframes fadeUp{ to{opacity:1; transform:translateY(0);} }
+
+  .facts{
+    display:flex; justify-content:center; gap:16px; flex-wrap:wrap;
+    margin:38px 0 64px;
+  }
+  .facts .fact{
+    background:#fff; border:1px solid var(--line);
+    padding:16px 24px; min-width:170px;
+    opacity:0; transform:translateY(18px);
+    animation:fadeUp .7s ease forwards;
+  }
+  .facts .fact:nth-child(1){animation-delay:.7s; border-top:3px solid var(--green);}
+  .facts .fact:nth-child(2){animation-delay:.82s; border-top:3px solid var(--red);}
+  .facts .fact:nth-child(3){animation-delay:.94s; border-top:3px solid var(--gold);}
+  .fact strong{display:block; font-family:'Fraunces',serif; font-weight:600; font-size:1.25rem;}
+  .fact span{font-size:0.82rem; color:var(--ink-soft);}
+
+  /* ---------- SECTION SCAFFOLD ---------- */
+  section{padding:88px 0;}
+  @media (max-width:640px){section{padding:56px 0;}}
+
+  .split{display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;}
+  @media (max-width:860px){ .split{grid-template-columns:1fr; gap:36px;} }
+  .split img{width:100%; height:460px; object-fit:cover;}
+  @media (max-width:860px){ .split img{height:300px;} }
+  .split-media{position:relative;}
+  .map-badge{
+    position:absolute; right:-28px; bottom:-28px; width:150px;
+    background:#fff; padding:10px; box-shadow:0 18px 40px -18px rgba(42,33,24,0.4);
+    border:1px solid var(--line);
+  }
+  .map-badge span{display:block; font-size:0.68rem; text-align:center; color:var(--ink-soft); margin-top:6px;}
+  @media (max-width:640px){ .map-badge{position:static; width:130px; margin:16px auto 0;} }
+
+  .story p{color:var(--ink-soft); font-size:1.02rem; margin-top:16px; max-width:52ch;}
+  .story h2{font-size:clamp(1.9rem,3.4vw,2.7rem); margin-top:2px;}
+  .origin-tags{list-style:none; display:flex; flex-wrap:wrap; gap:8px; padding:0; margin:22px 0 0;}
+  .origin-tags li{font-size:0.82rem; padding:6px 12px; background:var(--green); color:#fff;}
+  .origin-tags li:nth-child(2n){background:var(--red);}
+  .origin-tags li:nth-child(3n){background:var(--gold); color:var(--ink);}
+
+  /* ---------- OFERTA ---------- */
+  .offer-head{max-width:640px; margin-bottom:48px;}
+  .offer-head h2{font-size:clamp(1.9rem,3.4vw,2.7rem);}
+  .offer-head p{color:var(--ink-soft); margin-top:14px;}
+
+  .offer-row{display:grid; grid-template-columns:0.9fr 1.1fr; gap:56px; align-items:center; padding:52px 0; border-top:1px solid var(--line);}
+  .offer-row:last-child{border-bottom:1px solid var(--line);}
+  .offer-row.reverse{grid-template-columns:1.1fr 0.9fr;}
+  .offer-row.reverse .offer-img{order:2;}
+  @media (max-width:860px){
+    .offer-row, .offer-row.reverse{grid-template-columns:1fr;}
+    .offer-row.reverse .offer-img{order:0;}
+  }
+  .offer-img img{width:100%; height:340px; object-fit:cover;}
+  @media (max-width:860px){.offer-img img{height:250px;}}
+
+  .offer-num{font-family:'Fraunces',serif; font-style:italic; color:var(--gold); font-size:1rem; margin-bottom:6px;}
+  .offer-text h3{font-size:1.7rem; margin-bottom:12px;}
+  .offer-text > p{color:var(--ink-soft); margin-bottom:18px; max-width:48ch;}
+
+  .taglist{list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:10px;}
+  .taglist li{font-size:0.86rem; padding:7px 14px; border:1px solid var(--line); color:var(--ink-soft); background:rgba(255,255,255,0.5);}
+
+  /* ---------- INTERSTITIAL BANNER ---------- */
+  .interstitial{
+    position:relative; min-height:60vh; display:flex; align-items:center; justify-content:center;
+    background:
+      linear-gradient(180deg, rgba(24,17,12,0.35), rgba(24,17,12,0.62)),
+      url('assets/antipasto-board.jpg') center 38%/cover no-repeat;
+    background-color:#3a2c1c;
+    text-align:center; padding:0 24px;
+  }
+  .interstitial p{
+    font-family:'Fraunces',serif; font-style:italic; color:#fff;
+    font-size:clamp(1.5rem,3.6vw,2.6rem); max-width:20ch; margin:0;
+  }
+  .interstitial span{display:block; font-family:'Inter',sans-serif; font-style:normal; color:rgba(255,255,255,0.75); font-size:0.95rem; margin-top:16px; letter-spacing:0.02em;}
+
+  /* ---------- WIDEO / OPROWADZENIE ---------- */
+  .tour{background:var(--green); color:#fff;}
+  .tour .wrap{display:grid; grid-template-columns:0.85fr 1.15fr; gap:56px; align-items:center;}
+  @media (max-width:860px){ .tour .wrap{grid-template-columns:1fr;} }
+  .tour .eyebrow{color:var(--gold);}
+  .tour h2{color:#fff; font-size:clamp(1.8rem,3.2vw,2.5rem);}
+  .tour p{color:rgba(255,255,255,0.88); margin-top:14px; max-width:44ch;}
+
+  .video-frame{position:relative; aspect-ratio:9/16; max-width:360px; margin:0 auto; width:100%; background:#0f2016; border:6px solid rgba(255,255,255,0.14); overflow:hidden;}
+  .video-frame video{width:100%; height:100%; object-fit:cover; display:block;}
+  @media (max-width:860px){ .video-frame{max-width:280px;} }
+
+  /* ---------- GALERIA ---------- */
+  .gallery-grid{display:grid; grid-template-columns:repeat(4, 1fr); gap:14px; margin-top:28px;}
+  .gallery-grid > *{aspect-ratio:1/1; overflow:hidden; background:var(--cream-deep);}
+  .gallery-grid img{width:100%; height:100%; object-fit:cover; transition:transform .5s ease;}
+  .gallery-grid a:hover img{transform:scale(1.06);}
+  .gallery-grid .g-wide{grid-column:span 2;}
+  @media (max-width:760px){
+    .gallery-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  .g-map{position:relative;}
+  .g-map img{object-fit:contain; background:#fff; padding:10px;}
+  .g-map .g-label{position:absolute; left:0; right:0; bottom:0; background:rgba(42,33,24,0.82); color:#fff; font-size:0.72rem; text-align:center; padding:6px 4px;}
+  .g-cta{
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    background:var(--red); color:#fff; text-decoration:none; font-family:'Fraunces',serif; font-style:italic; font-size:1.05rem;
+    padding:16px; transition:background .2s;
+  }
+  .g-cta:hover{background:var(--red-deep);}
+
+  /* ---------- OPINIE ---------- */
+  .reviews-head{display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:18px; margin-bottom:40px;}
+  .reviews-score{display:flex; align-items:center; gap:14px;}
+  .score-num{font-family:'Fraunces',serif; font-size:2.6rem; font-weight:600;}
+  .stars{color:var(--gold); font-size:1.1rem; letter-spacing:2px;}
+  .reviews-grid{display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--line); border-left:1px solid var(--line);}
+  @media (max-width:860px){ .reviews-grid{grid-template-columns:1fr;} }
+  .review{padding:30px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); background:rgba(255,255,255,0.35);}
+  .review .stars{display:block; margin-bottom:12px; font-size:0.95rem;}
+  .review p{color:var(--ink); font-size:1rem; margin:0 0 16px 0;}
+  .review-name{font-family:'Fraunces',serif; font-style:italic; font-size:0.95rem;}
+  .review-meta{font-size:0.78rem; color:var(--ink-soft); margin-top:2px;}
+
+  /* ---------- LOKALIZACJA ---------- */
+  .location{background:var(--cream-deep);}
+  .loc-top{display:flex; gap:24px; align-items:flex-end; flex-wrap:wrap; margin-bottom:8px;}
+  .loc-thumb{width:150px; height:110px; object-fit:cover; flex-shrink:0;}
+  .location .wrap{display:grid; grid-template-columns:0.85fr 1.15fr; gap:56px;}
+  @media (max-width:900px){ .location .wrap{grid-template-columns:1fr;} }
+  .info-list{list-style:none; margin:24px 0 0 0; padding:0;}
+  .info-list li{display:flex; gap:16px; padding:16px 0; border-top:1px solid var(--line);}
+  .info-list li:last-child{border-bottom:1px solid var(--line);}
+  .info-list .k{font-size:0.78rem; color:var(--ink-soft); width:110px; flex-shrink:0; padding-top:2px;}
+  .info-list .v{font-size:1rem;}
+  .info-list .v small{display:block; color:var(--ink-soft); font-size:0.82rem; margin-top:4px;}
+  .map-frame{width:100%; height:100%; min-height:420px; border:1px solid var(--line);}
+  .hours-table{border-collapse:collapse; width:100%; max-width:280px;}
+  .hours-table td{padding:6px 0; font-size:0.92rem; border-top:1px solid var(--line);}
+  .hours-table tr:first-child td{border-top:none;}
+  .hours-table td:last-child{text-align:right; font-family:'Fraunces',serif; font-weight:500;}
+  .hours-table td.closed{color:var(--red); font-family:'Inter',sans-serif; font-weight:600;}
+  .directions-btn{display:inline-block; margin-top:22px; text-decoration:none; background:var(--red); color:#fff; padding:14px 26px; font-size:0.92rem;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink); color:rgba(251,243,225,0.75);}
+  .foot-top{padding:64px 0 44px; display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:48px;}
+  @media (max-width:760px){ .foot-top{grid-template-columns:1fr; gap:32px;} }
+  .foot-brand{display:flex; align-items:center; gap:12px; margin-bottom:16px;}
+  .foot-brand img{height:40px; width:auto; filter:brightness(1.15);}
+  footer h4{font-family:'Fraunces',serif; font-weight:500; font-style:italic; color:var(--cream); font-size:1.05rem; margin-bottom:14px;}
+  footer p, footer a{font-size:0.9rem; color:rgba(251,243,225,0.72); text-decoration:none; line-height:1.9;}
+  footer a:hover{color:var(--gold);}
+  .foot-bottom{border-top:1px solid rgba(251,243,225,0.14); padding:22px 0; font-size:0.76rem; color:rgba(251,243,225,0.45); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="#top" class="brand">
+      <img src="assets/logo.png" alt="Crudo Smak Włoch — logo">
+      <span class="brand-name">Crudo Smak Włoch<span>SKLEP SPOŻYWCZY · LUBLINIEC</span></span>
+    </a>
+    <nav class="links">
+      <a href="#historia">O nas</a>
+      <a href="#oferta">Oferta</a>
+      <a href="#sklep">Nasz sklep</a>
+      <a href="#opinie">Opinie</a>
+      <a href="#lokalizacja">Lokalizacja</a>
+    </nav>
+    <a class="nav-cta" href="#lokalizacja">Jak do nas trafić</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Otwórz menu">☰</button>
+  </div>
+  <nav class="links mobile-links" id="mobileLinks">
+    <a href="#historia">O nas</a>
+    <a href="#oferta">Oferta</a>
+    <a href="#sklep">Nasz sklep</a>
+    <a href="#opinie">Opinie</a>
+    <a href="#lokalizacja">Lokalizacja</a>
+  </nav>
+</header>
+
+<div id="top"></div>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-banner">
+    <img src="assets/hero-banner.jpg" alt="Crudo Smak Włoch — szynki, sery i smaki Toskanii">
+    <span class="hero-tag-badge">Delikatesy z sercem we Włoszech</span>
+  </div>
+  <div class="wrap">
+    <p class="hero-lede">Szynki dojrzewające w górach Parmy, sery z mleka toskańskich pastwisk
+      i oliwa tłoczona tam, gdzie od pokoleń robi się to tak samo. Wszystko to —
+      w samym centrum Lublińca.</p>
+    <div class="facts">
+      <div class="fact"><strong>5,0 / 5</strong><span>ocena Google (6 opinii)</span></div>
+      <div class="fact"><strong>Plac Kościuszki 4</strong><span>Lubliniec, 42-700</span></div>
+      <div class="fact"><strong>Pon–Pt 8–16</strong><span>sob. 9–13, niedz. zamknięte</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HISTORIA ============ -->
+<section id="historia">
+  <div class="wrap split">
+    <div class="story reveal-left">
+      <p class="eyebrow">Nasza historia</p>
+      <h2>Kawałek Włoch przy Placu Kościuszki</h2>
+      <span class="underline"></span>
+      <p>Crudo Smak Włoch to niewielki sklep, który powstał z jednego prostego przekonania —
+        że dobra szynka i prawdziwy parmezan nie muszą być zarezerwowane dla wakacji we Włoszech.
+        Sprowadzamy produkty bezpośrednio od sprawdzonych producentów, dbając o to,
+        by trafiały do Was w takiej formie, w jakiej Włosi sami by je wybrali.</p>
+      <p>To miejsce dla tych, którzy lubią wiedzieć, skąd pochodzi jedzenie na ich stole —
+        i dla tych, którzy po prostu chcą poczuć na chwilę smak Italii, nie wyjeżdżając z Lublińca.</p>
+      <ul class="origin-tags">
+        <li>Parma</li><li>Toskania</li><li>San Daniele</li><li>Emilia-Romania</li><li>Sycylia</li>
+      </ul>
+    </div>
+    <div class="split-media reveal-right">
+      <img src="assets/tuscany-hills.jpg" alt="Wzgórza Toskanii o wschodzie słońca">
+      <div class="map-badge">
+        <img src="assets/toscana-map.png" alt="Mapa regionu Toskanii">
+        <span>Toskania — jeden z regionów, z których czerpiemy</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ OFERTA ============ -->
+<section id="oferta">
+  <div class="wrap">
+    <div class="offer-head reveal">
+      <p class="eyebrow">Co znajdziecie na naszej ladzie</p>
+      <h2>Oferta</h2>
+      <span class="underline"></span>
+      <p>Trzy filary naszego sklepu — szynki dojrzewające, sery z różnych regionów Włoch
+        oraz starannie wybrane dodatki, bez których żaden włoski stół nie jest kompletny.</p>
+    </div>
+
+    <div class="offer-row">
+      <div class="offer-img reveal-left"><img src="assets/prosciutto-board.jpg" alt="Cienko krojone włoskie szynki i salami"></div>
+      <div class="offer-text reveal-right">
+        <p class="offer-num">01</p>
+        <h3>Szynki i wędliny dojrzewające</h3>
+        <p>Prawdziwe prosciutto crudo potrzebuje czasu — niektóre z naszych szynek dojrzewają
+          nawet ponad dwa lata. Kroimy je cienko, na miejscu, tuż przed sprzedażą.</p>
+        <ul class="taglist">
+          <li>Prosciutto di Parma DOP</li><li>Prosciutto crudo</li><li>Culatello</li>
+          <li>Speck</li><li>Salame Milano</li><li>Salame Verzino</li><li>Coppa</li><li>Cotto Prosciutto</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="offer-row reverse">
+      <div class="offer-img reveal-right"><img src="assets/parmesan-block.jpg" alt="Ser Parmigiano Reggiano Gran Soresina"></div>
+      <div class="offer-text reveal-left">
+        <p class="offer-num">02</p>
+        <h3>Sery z różnych regionów Włoch</h3>
+        <p>Od twardych serów dojrzewających latami, po świeże pecorino z truflą — każdy kawałek
+          wybieramy tak, by trafił na Wasz stół w najlepszej formie.</p>
+        <ul class="taglist">
+          <li>Parmigiano Reggiano</li><li>Pecorino Toscano DOP</li><li>Pecorino z truflą</li>
+          <li>Ser owczy Mignon Sycylia</li><li>Provola</li><li>Zappala</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="offer-row">
+      <div class="offer-img reveal-left"><img src="assets/olive-oil.jpg" alt="Butelka oliwy z oliwek extra vergine Crudo"></div>
+      <div class="offer-text reveal-right">
+        <p class="offer-num">03</p>
+        <h3>Oliwa, przetwory i reszta włoskiego stołu</h3>
+        <p>Dopełnienie każdego włoskiego posiłku — oliwa, konfitury, oliwki i pieczywo,
+          po które sięga się częściej, niż mogłoby się wydawać.</p>
+        <ul class="taglist">
+          <li>Oliwa Extra Virgin</li><li>Fico Caramellato</li><li>Oliwki marynowane</li>
+          <li>Karczochy</li><li>Suszone pomidory</li><li>Pane Turano</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTERSTITIAL ============ -->
+<div class="interstitial">
+  <p class="reveal-pop is-visible">„Życie jest zbyt krótkie<br>na zwyczajne smaki"
+    <span>— talerz, który mówi sam za siebie</span>
+  </p>
+</div>
+
+<!-- ============ WIDEO / OPROWADZENIE ============ -->
+<section class="tour" id="sklep">
+  <div class="wrap">
+    <div class="reveal-left">
+      <p class="eyebrow">Zajrzyjcie do środka</p>
+      <h2>Oprowadzenie po sklepie</h2>
+      <span class="underline"></span>
+      <p>Krótki spacer po naszej ladzie — zobaczcie, jak wygląda miejsce, w którym
+        wybieramy dla Was szynki i sery każdego dnia.</p>
+    </div>
+    <div class="video-frame reveal-right">
+      <video controls preload="metadata" poster="assets/storefront-day.jpg">
+        <source src="assets/shop-tour.mp4" type="video/mp4">
+        Twoja przeglądarka nie obsługuje odtwarzania wideo.
+      </video>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALERIA ============ -->
+<section>
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">Zdjęcia</p>
+      <h2>Galeria</h2>
+      <span class="underline"></span>
+    </div>
+    <div class="gallery-grid">
+      <a class="g-wide reveal-pop" href="assets/storefront-day.jpg" target="_blank"><img src="assets/storefront-day.jpg" alt="Wejście do sklepu Crudo Smak Włoch w dzień"></a>
+      <a class="reveal-pop" href="assets/deli-case.jpg" target="_blank"><img src="assets/deli-case.jpg" alt="Lada z serami i wędlinami"></a>
+      <a class="reveal-pop" href="assets/storefront-night.jpg" target="_blank"><img src="assets/storefront-night.jpg" alt="Sklep Crudo Smak Włoch wieczorem"></a>
+      <a class="g-wide reveal-pop" href="assets/siena.jpg" target="_blank"><img src="assets/siena.jpg" alt="Sienna — panorama toskańskiego miasta"></a>
+      <div class="g-map reveal-pop">
+        <img src="assets/toscana-map.png" alt="Mapa Toskanii">
+        <div class="g-label">Regiony pochodzenia</div>
+      </div>
+      <a class="g-cta reveal-pop" href="#lokalizacja">Odwiedź nas →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OPINIE ============ -->
+<section id="opinie">
+  <div class="wrap">
+    <div class="reviews-head reveal">
+      <div>
+        <p class="eyebrow">Co mówią klienci</p>
+        <h2>Opinie</h2>
+      </div>
+      <div class="reviews-score">
+        <span class="score-num">5,0</span>
+        <div><span class="stars">★★★★★</span><div class="review-meta">na podstawie 6 opinii w Google</div></div>
+      </div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review reveal">
+        <span class="stars">★★★★★</span>
+        <p>„Świetny sklep, pyszne włoskie produkty i bardzo miła obsługa. Polecam! 🇮🇹"</p>
+        <div class="review-name">Dominik</div><div class="review-meta">Opinia z Google</div>
+      </div>
+      <div class="review reveal">
+        <span class="stars">★★★★★</span>
+        <p>„Super sklep, przemiła obsługa, polecam."</p>
+        <div class="review-name">Karlos Lagerfeld</div><div class="review-meta">Opinia z Google</div>
+      </div>
+      <div class="review reveal">
+        <span class="stars">★★★★★</span>
+        <p>„Serdecznie polecam!"</p>
+        <div class="review-name">Klient Google</div><div class="review-meta">Opinia z Google</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LOKALIZACJA ============ -->
+<section class="location" id="lokalizacja">
+  <div class="wrap">
+    <div class="reveal-left">
+      <p class="eyebrow">Odwiedźcie nas</p>
+      <h2>Lokalizacja i dojazd</h2>
+      <span class="underline"></span>
+      <ul class="info-list">
+        <li><span class="k">Adres</span><span class="v">Plac gen. Tadeusza Kościuszki 4<br>42-700 Lubliniec</span></li>
+        <li><span class="k">Godziny</span><span class="v">
+          <table class="hours-table">
+            <tr><td>Poniedziałek</td><td>08:00–16:00</td></tr>
+            <tr><td>Wtorek</td><td>08:00–16:00</td></tr>
+            <tr><td>Środa</td><td>08:00–16:00</td></tr>
+            <tr><td>Czwartek</td><td>08:00–16:00</td></tr>
+            <tr><td>Piątek</td><td>08:00–16:00</td></tr>
+            <tr><td>Sobota</td><td>09:00–13:00</td></tr>
+            <tr><td>Niedziela</td><td class="closed">Zamknięte</td></tr>
+          </table>
+        </span></li>
+        <li><span class="k">Telefon</span><span class="v"><a href="tel:510199809">510 199 809</a></span></li>
+        <li><span class="k">Strona</span><span class="v"><a href="https://sklepcrudo.pl" target="_blank" rel="noopener">sklepcrudo.pl</a></span></li>
+      </ul>
+      <a class="directions-btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Plac+gen.+Tadeusza+Ko%C5%9Bciuszki+4,+42-700+Lubliniec">Wyznacz trasę →</a>
+    </div>
+    <iframe class="map-frame reveal-right" loading="lazy" src="https://www.google.com/maps?q=Plac+gen.+Tadeusza+Ko%C5%9Bciuszki+4,+42-700+Lubliniec&output=embed"></iframe>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer id="kontakt">
+  <div class="wrap foot-top">
+    <div>
+      <div class="foot-brand"><img src="assets/logo.png" alt="Crudo Smak Włoch"><span class="brand-name" style="color:var(--cream);">Crudo Smak Włoch</span></div>
+      <p style="max-width:34ch;">Włoskie delikatesy w sercu Lublińca — szynki, sery i smaki, po które warto zboczyć z drogi.</p>
+    </div>
+    <div>
+      <h4>Kontakt</h4>
+      <p>Plac gen. Tadeusza Kościuszki 4<br>42-700 Lubliniec</p>
+      <p><a href="tel:510199809">510 199 809</a></p>
+      <p><a href="https://sklepcrudo.pl" target="_blank" rel="noopener">sklepcrudo.pl</a></p>
+    </div>
+    <div>
+      <h4>Znajdź nas</h4>
+      <p><a href="https://www.facebook.com/profile.php?id=61591446596702" target="_blank" rel="noopener">Facebook</a></p>
+      <p><a href="https://www.google.com/maps/dir/?api=1&destination=Plac+gen.+Tadeusza+Ko%C5%9Bciuszki+4,+42-700+Lubliniec" target="_blank" rel="noopener">Wyznacz trasę w Google Maps</a></p>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>© Crudo Smak Włoch, Lubliniec</span>
+    <span>Zdjęcia sklepu, produktów i filmik pochodzą od Crudo Smak Włoch. Zdjęcia krajobrazów Toskanii i Sieny mają charakter ilustracyjny.</span>
+  </div>
+  <div class="wrap" style="padding:0 32px 20px;">
+    <p style="font-size:0.7rem; color:rgba(251,243,225,0.4); margin:0;">Wszystkie zdjęcia zamieszczone na tej stronie są objęte prawami autorskimi.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('menuToggle').addEventListener('click', function(){
+    document.getElementById('mobileLinks').classList.toggle('open');
+  });
+  document.querySelectorAll('.mobile-links a').forEach(function(a){
+    a.addEventListener('click', function(){ document.getElementById('mobileLinks').classList.remove('open'); });
+  });
+
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry, i){
+      if(entry.isIntersecting){
+        var el = entry.target;
+        var delay = (el.dataset.delay) ? parseFloat(el.dataset.delay) : (i % 4) * 0.08;
+        el.style.transitionDelay = delay + 's';
+        el.classList.add('is-visible');
+        io.unobserve(el);
+      }
+    });
+  }, {threshold:0.15, rootMargin:'0px 0px -40px 0px'});
+
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-pop').forEach(function(el){
+    io.observe(el);
+  });
+</script>
+</body>
+</html>
